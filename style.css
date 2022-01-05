@@ -1,0 +1,27 @@
+.calculatorBody{
+    width: 500px;
+    border: 5px solid black;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+.screen{
+    width: 80%;
+    height: 50px;
+    font-size: 30px;
+    text-align: end;
+}
+.buttonGrid{
+    width: 80%;
+    display: grid;
+    grid-template-columns: auto auto auto auto; 
+}
+.button {
+    padding: 10px;
+}
+
+#equal{
+    grid-column: 3/5;
+}
