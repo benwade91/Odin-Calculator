@@ -2,14 +2,15 @@ let outcome = 0;
 let inputString = '';
 let equation = [];
 const screen = document.querySelector('.screen');
-const numbers = document.querySelectorAll('.number')
-const operators = document.querySelectorAll('.operator')
-const negative = document.querySelector('#negative')
-const clear = document.querySelector('#clear')
+const numbers = document.querySelectorAll('.number');
+const operators = document.querySelectorAll('.operator');
+const negative = document.querySelector('#negative');
+const clear = document.querySelector('#clear');
+const percent = document.querySelector('#percent');
 
 numbers.forEach(number => {
     number.onclick = () => setInput(number.innerText);
-})
+});
 
 negative.onclick = () => {
     if (inputString == '') {
@@ -18,7 +19,7 @@ negative.onclick = () => {
         inputString = String(parseFloat(inputString) * -1)
     }
     screen.innerText = inputString;
-}
+};
 
 clear.onclick = () => {
     if (inputString == '') {
@@ -32,6 +33,13 @@ clear.onclick = () => {
             x.style.color = 'black';
         })
     }
+};
+
+percent.onclick = () => {
+    if (inputString != '') {
+        inputString = String(parseFloat(inputString) * .01)
+        screen.innerText = inputString;
+    }
 }
 
 const setInput = (input) => {
@@ -41,7 +49,7 @@ const setInput = (input) => {
     operators.forEach(operator => {
         operator.onclick = () => setOperator(operator)
     })
-}
+};
 
 const setOperator = (operator) => {
     equation.push(parseFloat(inputString))
@@ -49,7 +57,7 @@ const setOperator = (operator) => {
     operator.style.backgroundColor = 'grey'
     operator.style.color = 'white';
     inputString = ''
-}
+};
 
 const evaluate = () => {
     inputString !== '' && equation.push(parseFloat(inputString))
@@ -76,6 +84,8 @@ const evaluate = () => {
             x.style.color = 'black';
         })
         equation = [];
+        inputString = '';
     }
-}
+};
+
 document.querySelector('#equal').onclick = () => evaluate();
