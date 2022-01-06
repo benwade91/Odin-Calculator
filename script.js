@@ -25,13 +25,14 @@ clear.onclick = () => {
     if (inputString == '') {
         screen.innerText = 0;
         equation = [];
+        operators.forEach(x => {
+            x.style.backgroundColor = '#FF9500';
+            x.style.color = 'white';
+        })
     } else {
         inputString = '';
         screen.innerText = '';
-        operators.forEach(x => {
-            x.style.backgroundColor = 'white';
-            x.style.color = 'black';
-        })
+        clear.innerText = 'AC'
     }
 };
 
@@ -45,7 +46,7 @@ percent.onclick = () => {
 const setInput = (input) => {
     inputString += input;
     screen.innerText = inputString;
-
+    clear.innerText = 'C'
     operators.forEach(operator => {
         operator.onclick = () => setOperator(operator)
     })
@@ -54,8 +55,8 @@ const setInput = (input) => {
 const setOperator = (operator) => {
     equation.push(parseFloat(inputString))
     equation.push(operator.innerText)
-    operator.style.backgroundColor = 'grey'
-    operator.style.color = 'white';
+    operator.style.backgroundColor = 'white'
+    operator.style.color = '#FF9500';
     inputString = ''
 };
 
@@ -64,28 +65,29 @@ const evaluate = () => {
     if (equation.length == 3) {
         switch (equation[1]) {
             case '+':
-                screen.innerText = equation[0] + equation[2]
+                inputString = String(equation[0] + equation[2])
                 break;
-            case '-':
-                screen.innerText = equation[0] - equation[2]
+            case '—':
+                inputString = String(equation[0] - equation[2])
                 break;
             case 'x':
-                screen.innerText = equation[0] * equation[2]
+                inputString = String(equation[0] * equation[2])
                 break;
-            case '/':
-                screen.innerText = equation[0] / equation[2]
+            case '÷':
+                inputString = String(equation[0] / equation[2])
                 break;
             default:
                 console.log('there was a problem');
                 break;
         }
         operators.forEach(x => {
-            x.style.backgroundColor = 'white';
-            x.style.color = 'black';
+            x.style.backgroundColor = '#FF9500';
+            x.style.color = 'white';
         })
         equation = [];
-        inputString = '';
+        screen.innerText = inputString
     }
 };
 
 document.querySelector('#equal').onclick = () => evaluate();
+document.querySelector('#date').innerText = (new Date()).getFullYear();
